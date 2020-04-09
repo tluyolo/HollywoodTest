@@ -1,0 +1,63 @@
+﻿@model IEnumerable<HollywoodTest.EventDetailStatu>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EventDetailStatusID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventDetailStatusName)
+        </th>
+        <th></th>
+    </tr>
+    @if (this.User.IsInRole("Admin") || this.User.IsInRole("Manager"))
+    {
+
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventDetailStatusID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventDetailStatusName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id=item.EventDetailStatusID}) |
+                    @Html.ActionLink("Details", "Details", new {id=item.EventDetailStatusID }) |
+                    @Html.ActionLink("Delete", "Delete", new {id=item.EventDetailStatusID})
+                </td>
+            </tr>
+        }
+    }
+
+    @if (this.User.IsInRole("Cashier"))
+    {
+
+        foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventDetailStatusID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EventDetailStatusName)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.EventDetailStatusID }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.EventDetailStatusID }) |
+                </td>
+            </tr>
+        }
+    }
+</table>

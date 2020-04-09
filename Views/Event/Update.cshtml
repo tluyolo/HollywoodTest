@@ -1,0 +1,59 @@
+﻿@model IEnumerable<HollywoodTest.Event>
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Update Events</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EventName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventEndDateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AutoClose)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tournament.TournamentName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventEndDateTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AutoClose)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Tournament.TournamentName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EventID }) |
+        </td>
+    </tr>
+}
+
+</table>

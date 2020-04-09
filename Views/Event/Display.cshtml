@@ -1,0 +1,68 @@
+﻿@model IEnumerable<HollywoodTest.Event>
+
+@{
+    ViewBag.Title = "Display";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid webGrid = new WebGrid(source: Model, canPage: false, canSort: false);
+}
+
+<h2>Our Event</h2>
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete Events</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        .Grid {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+            .Grid th {
+                background-color: #F7F7F7;
+                font-weight: bold;
+            }
+
+            .Grid th, .Grid td {
+                padding: 5px;
+                border: 1px solid #ccc;
+            }
+
+                .Grid td:not(:first-child) {
+                    min-width: 80px;
+                }
+
+            .Grid, .Grid table td {
+                border: 0px solid #ccc;
+            }
+
+                .Grid th a, .Grid th a:visited {
+                    color: #333;
+                }
+    </style>
+</head>
+<body>
+    @webGrid.GetHtml(
+        htmlAttributes: new { @id = "WebGrid", @class = "Grid" },
+        columns: webGrid.Columns(
+                     webGrid.Column(null, null, format: @<text><input type="checkbox" name="chkRow" value="@item.EventID" /></text>),
+webGrid.Column("EventID", "Event ID"),
+webGrid.Column("TounamentID", "TournamentID"),
+webGrid.Column("EventName", "Event Name"),
+webGrid.Column("EventNumber", "Event Number"),
+webGrid.Column("EventDateTime", "Event Date and Time"),
+webGrid.Column("EventEndDateTime", "Event end Date and Time"),
+webGrid.Column("AutoClose", "Auto Close")))
+    <br />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script>
+</body>
+</html>

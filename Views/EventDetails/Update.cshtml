@@ -1,0 +1,67 @@
+﻿@model IEnumerable<HollywoodTest.EventDetail>
+
+@{
+    ViewBag.Title = "Update";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Update Event Details</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EventDetailStatusID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventDetailName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventDetailNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EventDetailOdd)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FinishingPosition)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirsTimer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Event.EventName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventDetailStatusID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventDetailName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventDetailNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventDetailOdd)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FinishingPosition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FirsTimer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Event.EventName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EventDetailID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EventDetailID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EventDetailID })
+        </td>
+    </tr>
+}
+
+</table>
