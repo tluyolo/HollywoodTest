@@ -16,7 +16,6 @@
         @Html.HiddenFor(model => model.EventID)
 
     <div class="form-group">
-        <a href="~/Views/Event/Edit.cshtml">~/Views/Event/Edit.cshtml</a>
         @Html.LabelFor(model => model.TounamentID, "Tounament Name", htmlAttributes: new { @class = "control-label col-md-2" })
         <div class="col-md-10">
             @Html.DropDownList("TounamentID", null, htmlAttributes: new { @class = "form-control" })
