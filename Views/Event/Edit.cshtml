@@ -5,9 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
-
-
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
@@ -18,16 +15,17 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.EventID)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.TounamentID, "TounamentID", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("TounamentID", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TounamentID, "", new { @class = "text-danger" })
-            </div>
+    <div class="form-group">
+        <a href="~/Views/Event/Edit.cshtml">~/Views/Event/Edit.cshtml</a>
+        @Html.LabelFor(model => model.TounamentID, "Tounament Name", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("TounamentID", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.TounamentID, "", new { @class = "text-danger" })
         </div>
+    </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EventName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.EventName, "Event Name", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EventName, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EventName, "", new { @class = "text-danger" })
@@ -35,7 +33,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EventNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.EventNumber, "Event Number", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EventNumber, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EventNumber, "", new { @class = "text-danger" })
@@ -43,7 +41,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EventDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.EventDateTime, "Event Date Time", htmlAttributes: new { @class = "control -label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EventDateTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EventDateTime, "", new { @class = "text-danger" })
@@ -51,7 +49,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EventEndDateTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.EventEndDateTime, "Event End Date Time", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EventEndDateTime, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EventEndDateTime, "", new { @class = "text-danger" })
@@ -59,7 +57,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AutoClose, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AutoClose, "Auto Close", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="checkbox">
                     @Html.EditorFor(model => model.AutoClose)
@@ -82,4 +80,4 @@
 
 <script src="~/Scripts/jquery-3.4.1.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
-<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+

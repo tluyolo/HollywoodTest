@@ -15,326 +15,252 @@
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <script src="~/Scripts/modernizr-2.8.3.js"></script>
 </head>
-    <body>
-                    <div class="navbar navbar-inverse navbar-fixed-top">
-                        <div class="container">
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                    <span class="icon-bar"></span>
-                                </button>
-                                @Html.ActionLink("Hollywood Test", "Index", "Users", new { area = "" }, new { @class = "navbar-brand" })
-                            </div>
-                            <div class="navbar-collapse collapse">
-                                <ul class="nav navbar-nav">
-                                    <li>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("Hollywood Test", "Index", "Users", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li>
 
-                                        @if (Request.IsAuthenticated)
+                        @if (Request.IsAuthenticated)
 
-                                        {
+                        {
 
-                                            if (this.User.IsInRole("Admin"))
-                                            {
-                                                <div class="collapse navbar-collapse">
-                                                    <ul class="nav navbar-nav">
-                                                        <li class="active"><a href="@Url.Action("Index", "Users")">Home</a></li>
-
-
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "Tournaments")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Tournament<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                                
-                                                                <li><a href="@Url.Action("Create", "Tournaments")">Create Tournament</a></li>
-                                                                <li><a href="@Url.Action("Display", "Tournaments")">Our Tournaments</a></li>
-                                                                <li><a href="@Url.Action("Index", "Tournaments")">Modify Tournament</a></li>
-                                                              
-                                                            </ul>
-                                                        </li>
-
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "Event")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Events<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                              
-                                                                <li><a href="@Url.Action("Create", "Event")">Create Events</a></li>
-                                                                <li><a href="@Url.Action("Display", "Event")">Our Events</a></li>
-                                                                <li><a href="@Url.Action("Index", "Event")">Modify Events</a></li>
-                                                              
-
-                                                            </ul>
-                                                        </li>
-
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "EventDetails")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Event Details<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                                
-                                                                <li><a href="@Url.Action("Create", "EventDetails")">Create Event Details</a></li>
-                                                                <li><a href="@Url.Action("Display", "EventDetails")">Our Event Details</a></li>
-                                                                <li><a href="@Url.Action("Index", "EventDetails")">Modify Event Details</a></li>
-                                 >
-
-                                                            </ul>
-                                                        </li>
+                            if (this.User.IsInRole("Admin") || this.User.IsInRole("Manager"))
+                            {
+                                <div class="collapse navbar-collapse">
+                                    <ul class="nav navbar-nav">
+                                        <li class="active"><a href="@Url.Action("Index", "Users")">Home</a></li>
 
 
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "EventDetailsStatus")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Event Details Status<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                                
-                                                                <li><a href="@Url.Action("Create", "EventDetailStatus")">Create Event Details Status</a></li>
-                                                                <li><a href="@Url.Action("Display", "EventDetailStatus")">Our Event Details Status</a></li>
-                                                                <li><a href="@Url.Action("Index", "EventDetailStatus")">Modify Event Details Status</a></li>
-                                                          
+                                        <li class="dropdown">
+                                            <a href="@Url.Action("Index", "Tournaments")" class="dropdown-toggle"
+                                               data-toggle="dropdown">Tournament<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
 
-                                                            </ul>
-                                                        </li>
-
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "Account")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Srcreen Master<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                              
-                                                                <li><a href="@Url.Action("Register", "Account")">Create Account</a></li>
-                                                               
-                                                                <li><a href="@Url.Action("ChangePassword", "Manage")">Change Password</a></li>
-                                                              
-                                                            
-                                                            </ul>
-                                                        </li>
-
-                                                        <li class="active"><a href="@Url.Action("Login", "Account")">Log Out</a></li>
-                                                    </ul>
-                                                </div>
-
-                                            }
-                                            else if (this.User.IsInRole("Manager"))
-                                            {
-                                                <div class="collapse navbar-collapse">
-                                                    <ul class="nav navbar-nav">
-                                                        <li class="active"><a href="@Url.Action("Index", "Users")">Home</a></li>
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "Tournament")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Tournament<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                        
-                                                                <li><a href="@Url.Action("Create", "Tournaments")">Create Tournament</a></li>
-                                                                <li><a href="@Url.Action("Display", "Tournaments")">Our Tournaments</a></li>
-                                                                <li><a href="@Url.Action("Index", "Tournaments")">Modify Tournament</a></li>
-                                                               
-
-                                                            </ul>
-                                                        </li>
-
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "Event")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Events<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                              
-                                                                <li><a href="@Url.Action("Create", "Event")">Create Events</a></li>
-                                                                <li><a href="@Url.Action("Display", "Event")">Our Events</a></li>
-                                                                <li><a href="@Url.Action("Index", "Event")">Modify Events</a></li>
-                                                     
-
-                                                            </ul>
-                                                        </li>
-
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "EventDetails")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Event Details<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                                
-                                                                <li><a href="@Url.Action("Create", "EventDetails")">Create Event Details</a></li>
-                                                                <li><a href="@Url.Action("Display", "EventDetails")">Our Event Details</a></li>
-                                                                <li><a href="@Url.Action("Index", "EventDetails")">Modify Event Details</a></li>
-                                                             
-
-                                                            </ul>
-                                                        </li>
-
-
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "EventDetailsStatus")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Event Details Status<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                            
-                                                                <li><a href="@Url.Action("Create", "EventDetailStatus")">Create Event Details Status</a></li>
-                                                                <li><a href="@Url.Action("Display", "EventDetailStatus")">Our Event Details Status</a></li>
-                                                                <li><a href="@Url.Action("Index", "EventDetailStatus")">Modify Event Details Status</a></li>
-                                                      
-
-                                                            </ul>
-                                                        </li>
-
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "Account")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Srcreen Master<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-
-                                                                <li><a href="@Url.Action("Register", "Account")">Create Create</a></li>
-                                                                <li><a href="@Url.Action("ChangePassword", "Manage")">Change Password</a></li>
-                                                
-                                                            </ul>
-                                                        </li>
-
-
-                                                        <li class="active"><a href="@Url.Action("Login", "Account")">Log Out</a></li>
-                                                    </ul>
-                                                </div>
-
-                                            }
-                                            else if (this.User.IsInRole("Cashier"))
-                                            {
-                                                <div class="collapse navbar-collapse">
-                                                    <ul class="nav navbar-nav">
-                                                        <li class="active"><a href="@Url.Action("Index", "Users")">Home</a></li>
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "Tournament")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Tournament<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                              
-                                                                <li><a href="@Url.Action("Create", "Tournaments")">Create Tournament</a></li>
-                                                                <li><a href="@Url.Action("Display", "Tournaments")">Our Tournaments</a></li>
-                                                                <li><a href="@Url.Action("Index", "Tournaments")">Modify Tournaments</a></li>
-
-                                                            </ul>
-                                                        </li>
-
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "Event")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Events<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                               
-                                                                <li><a href="@Url.Action("Create", "Event")">Create Events</a></li>
-                                                                <li><a href="@Url.Action("Display", "Event")">Our Events</a></li>
-                                                                <li><a href="@Url.Action("Index", "Event")">Modify Events</a></li>
-                                                   
-
-                                                            </ul>
-                                                        </li>
-
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "EventDetails")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Event Details<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                               
-                                                                <li><a href="@Url.Action("Create", "EventDetails")">Create Event Details</a></li>
-                                                                <li><a href="@Url.Action("Display", "EventDetails")">Our Event Details</a></li>
-
-                                                                <li><a href="@Url.Action("Index", "EventDetails")">Modify Event Details</a></li>
-
-                                                            </ul>
-                                                        </li>
-
-
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "EventDetailsStatus")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Event Details Status<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                               
-                                                                <li><a href="@Url.Action("Create", "EventDetailStatus")">Create Event Details Status</a></li>
-                                                                <li><a href="@Url.Action("Display", "EventDetailStatus")">Our Event Details Status</a></li>
-
-                                                                <li><a href="@Url.Action("Index", "EventDetailStatus")">Modify Event Details Status</a></li>
-
-                                                            </ul>
-                                                        </li>
-
-
-
-                                                        <li class="active"><a href="@Url.Action("login", "Account")">Log Out</a></li>
-                                                    </ul>
-                                                </div>
-
-                                            }
-                                            if (this.User.IsInRole("Employee"))
-                                            {
-                                                <div class="collapse navbar-collapse">
-                                                    <ul class="nav navbar-nav">
-                                                        <li class="active"><a href="@Url.Action("Index", "Users")">Home</a></li>
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "Tournament")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Tournament<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                               
-                                                                <li><a href="@Url.Action("Create", "Tournaments")">Create Tournament</a></li>
-                                                                <li><a href="@Url.Action("Display", "Tournaments")">Our Tournaments</a></li>
-
-
-                                                            </ul>
-                                                        </li>
-
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "Event")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Events<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                              
-                                                                <li><a href="@Url.Action("Create", "Event")">Create Events</a></li>
-                                                                <li><a href="@Url.Action("Display", "Event")">Our Events</a></li>
-
-
-                                                            </ul>
-                                                        </li>
-
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "EventDetails")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Event Details<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                               
-                                                                <li><a href="@Url.Action("Create", "EventDetails")">Create Event Details</a></li>
-                                                                <li><a href="@Url.Action("Display", "EventDetails")">Our Event Details</a></li>
-
-
-                                                            </ul>
-                                                        </li>
-
-
-                                                        <li class="dropdown">
-                                                            <a href="@Url.Action("Index", "EventDetailsStatus")" class="dropdown-toggle"
-                                                               data-toggle="dropdown">Event Details<span class="caret"></span></a>
-                                                            <ul class="dropdown-menu" role="menu">
-                                                                
-                                                                <li><a href="@Url.Action("Create", "EventDetailStatus")">Create Event Details Status</a></li>
-                                                                <li><a href="@Url.Action("Display", "EventDetailStatus")">Our Event Details Status</a></li>
-
-                                                            </ul>
-                                                        </li>
-                                                        <li class="active"><a href="@Url.Action("login", "Account")">Log Out</a></li>
-                                                    </ul>
-                                                </div>
-
-                                            }
-
-                                        }
-                                        else
-                                        {
-
-                                            @Html.ActionLink("Login", "Login", "Account")
-                                        }
-                                    </li>
-                                        <li>
-                                            @if (!Request.IsAuthenticated)
-                                            {
-                                                @Html.ActionLink("Register", "Register", "Account")
-                                            }
-
+                                                <li><a href="@Url.Action("Create", "Tournaments")">Create Tournament</a></li>
+                                                <li><a href="@Url.Action("Display", "Tournaments")">Our Tournaments</a></li>
+                                                <li><a href="@Url.Action("Index", "Tournaments")">Delete Tournament</a></li>
+                                                <li><a href="@Url.Action("IndexUpdate", "Tournaments")">Modify Tournament</a></li>
+                                            </ul>
                                         </li>
-                                        </ul>
-                                    </div>
-                        </div>
-                    </div>
 
-                    <div class="container body-content">
-                        @RenderBody()
-                        <hr />
-                        <footer>
-                            <p>                             &copy; @DateTime.Now.Year - Hollywood Test</p>
-                        </footer>
-                    </div>
-                    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
-                    <script src="~/Scripts/bootstrap.min.js"></script>
-                </body>
+                                        <li class="dropdown">
+                                            <a href="@Url.Action("Index", "Event")" class="dropdown-toggle"
+                                               data-toggle="dropdown">Events<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+
+                                                <li><a href="@Url.Action("Create", "Event")">Create Events</a></li>
+                                                <li><a href="@Url.Action("Display", "Event")">Our Events</a></li>
+                                                <li><a href="@Url.Action("Index", "Event")">Delete Events</a></li>
+                                                <li><a href="@Url.Action("IndexUpdate", "Event")">Modify Events</a></li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a href="@Url.Action("Index", "EventDetails")" class="dropdown-toggle"
+                                               data-toggle="dropdown">Event Details<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+
+                                                <li><a href="@Url.Action("Create", "EventDetails")">Create Event Details</a></li>
+                                                <li><a href="@Url.Action("Display", "EventDetails")">Our Event Details</a></li>
+                                                <li><a href="@Url.Action("Index", "EventDetails")">Delete Event Details</a></li>
+                                                <li><a href="@Url.Action("IndexUpdate", "EventDetails")">Modify Event Details</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+                                        <li class="dropdown">
+                                            <a href="@Url.Action("Index", "EventDetailsStatus")" class="dropdown-toggle"
+                                               data-toggle="dropdown">Event Details Status<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+
+                                                <li><a href="@Url.Action("Create", "EventDetailStatus")">Create Event Details Status</a></li>
+                                                <li><a href="@Url.Action("Display", "EventDetailStatus")">Our Event Details Status</a></li>
+                                                <li><a href="@Url.Action("Index", "EventDetailStatus")">Delete Event Details Status</a></li>
+                                                <li><a href="@Url.Action("IndexUpdate", "EventDetailStatus")">Modify Event Details Status</a></li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a href="@Url.Action("Index", "Account")" class="dropdown-toggle"
+                                               data-toggle="dropdown">Srcreen Master<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+
+                                                <li><a href="@Url.Action("Register", "Account")">Create Account</a></li>
+
+                                                <li><a href="@Url.Action("ChangePassword", "Manage")">Change Password</a></li>
+
+
+                                            </ul>
+                                        </li>
+
+                                        <li class="active"><a href="@Url.Action("Login", "Account")">Log Out</a></li>
+                                    </ul>
+                                </div>
+
+                            }
+                           
+                            else if (this.User.IsInRole("Cashier"))
+                            {
+                                <div class="collapse navbar-collapse">
+                                    <ul class="nav navbar-nav">
+                                        <li class="active"><a href="@Url.Action("Index", "Users")">Home</a></li>
+                                        <li class="dropdown">
+                                            <a href="@Url.Action("Index", "Tournament")" class="dropdown-toggle"
+                                               data-toggle="dropdown">Tournament<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+
+                                                <li><a href="@Url.Action("Create", "Tournaments")">Create Tournament</a></li>
+                                                <li><a href="@Url.Action("Display", "Tournaments")">Our Tournaments</a></li>
+                                                <li><a href="@Url.Action("IndexUpdate", "Tournaments")">Modify Tournaments</a></li>
+
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a href="@Url.Action("Index", "Event")" class="dropdown-toggle"
+                                               data-toggle="dropdown">Events<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+
+                                                <li><a href="@Url.Action("Create", "Event")">Create Events</a></li>
+                                                <li><a href="@Url.Action("Display", "Event")">Our Events</a></li>
+                                                <li><a href="@Url.Action("IndexUpdate", "Event")">Modify Events</a></li>
+
+
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a href="@Url.Action("Index", "EventDetails")" class="dropdown-toggle"
+                                               data-toggle="dropdown">Event Details<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+
+                                                <li><a href="@Url.Action("Create", "EventDetails")">Create Event Details</a></li>
+                                                <li><a href="@Url.Action("Display", "EventDetails")">Our Event Details</a></li>
+
+                                                <li><a href="@Url.Action("IndexUpdate", "EventDetails")">Modify Event Details</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+                                        <li class="dropdown">
+                                            <a href="@Url.Action("Index", "EventDetailsStatus")" class="dropdown-toggle"
+                                               data-toggle="dropdown">Event Details Status<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+
+                                                <li><a href="@Url.Action("Create", "EventDetailStatus")">Create Event Details Status</a></li>
+                                                <li><a href="@Url.Action("Display", "EventDetailStatus")">Our Event Details Status</a></li>
+
+                                                <li><a href="@Url.Action("IndexUpdate", "EventDetailStatus")">Modify Event Details Status</a></li>
+
+                                            </ul>
+                                        </li>
+
+
+
+                                        <li class="active"><a href="@Url.Action("login", "Account")">Log Out</a></li>
+                                    </ul>
+                                </div>
+
+                            }
+                            if (this.User.IsInRole("Employee"))
+                            {
+                                <div class="collapse navbar-collapse">
+                                    <ul class="nav navbar-nav">
+                                        <li class="active"><a href="@Url.Action("Index", "Users")">Home</a></li>
+                                        <li class="dropdown">
+                                            <a href="@Url.Action("Index", "Tournament")" class="dropdown-toggle"
+                                               data-toggle="dropdown">Tournament<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+
+                                                <li><a href="@Url.Action("Create", "Tournaments")">Create Tournament</a></li>
+                                                <li><a href="@Url.Action("Display", "Tournaments")">Our Tournaments</a></li>
+
+
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a href="@Url.Action("Index", "Event")" class="dropdown-toggle"
+                                               data-toggle="dropdown">Events<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+
+                                                <li><a href="@Url.Action("Create", "Event")">Create Events</a></li>
+                                                <li><a href="@Url.Action("Display", "Event")">Our Events</a></li>
+
+
+                                            </ul>
+                                        </li>
+
+                                        <li class="dropdown">
+                                            <a href="@Url.Action("Index", "EventDetails")" class="dropdown-toggle"
+                                               data-toggle="dropdown">Event Details<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+
+                                                <li><a href="@Url.Action("Create", "EventDetails")">Create Event Details</a></li>
+                                                <li><a href="@Url.Action("Display", "EventDetails")">Our Event Details</a></li>
+
+
+                                            </ul>
+                                        </li>
+
+
+                                        <li class="dropdown">
+                                            <a href="@Url.Action("Index", "EventDetailsStatus")" class="dropdown-toggle"
+                                               data-toggle="dropdown">Event Details<span class="caret"></span></a>
+                                            <ul class="dropdown-menu" role="menu">
+
+                                                <li><a href="@Url.Action("Create", "EventDetailStatus")">Create Event Details Status</a></li>
+                                                <li><a href="@Url.Action("Display", "EventDetailStatus")">Our Event Details Status</a></li>
+
+                                            </ul>
+                                        </li>
+                                        <li class="active"><a href="@Url.Action("login", "Account")">Log Out</a></li>
+                                    </ul>
+                                </div>
+
+                            }
+
+                        }
+                        else
+                        {
+
+                            @Html.ActionLink("Login", "Login", "Account")
+                        }
+                    </li>
+                    <li>
+                        @if (!Request.IsAuthenticated)
+                        {
+                            @Html.ActionLink("Register", "Register", "Account")
+                        }
+
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>                             &copy; @DateTime.Now.Year - Hollywood Test</p>
+        </footer>
+    </div>
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+</body>
 </html>

@@ -65,7 +65,7 @@ namespace HollywoodTest.Models
                 studentlist.Add(
                     new EventDetailStatusModels
                     {
-                        EventDetailstatusID = Convert.ToInt32(dr["EventDatailStatusID"]),
+                        EventDetailstatusID = Convert.ToInt16(dr["EventDatailStatusID"]),
                         EventDetailstatus = Convert.ToString(dr["EventDatailStatusName"])
                      
                     });
@@ -94,7 +94,7 @@ namespace HollywoodTest.Models
         }
 
         // ********************** DELETE Event DETAILS *******************
-        public bool DeleteEventDetailstatus(int EventDetailstatusId)
+        public bool DeleteEventDetailstatus(long? EventDetailstatusId)
         {
             connection();
             SqlCommand cmd = new SqlCommand("DeleteProcEventDetailsStatus", con);

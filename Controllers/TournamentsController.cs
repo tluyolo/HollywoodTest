@@ -18,9 +18,38 @@ namespace HollywoodTest.Controllers
         // GET: Tournaments
         public ActionResult Index()
         {
+            //HollywoodTestEntities1 Entities = new HollywoodTestEntities1();
+            ViewBag.ListTournament = this.db.Tournaments.ToList();
+           // List<Tournament> events = Entities.Tournaments.ToList();
+            return View();
+        }
+
+        public ActionResult IndexUpdate()
+        {
             HollywoodTestEntities1 Entities = new HollywoodTestEntities1();
             List<Tournament> events = Entities.Tournaments.ToList();
             return View(events.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult Index(FormCollection formCollection)
+        {
+            try
+            {
+                string[] TounamentIDs = formCollection["TounamentID"].Split(new char[] { ',' });
+                foreach (string TounamentID in TounamentIDs)
+                {
+                    var tournament = this.db.Tournaments.Find(int.Parse(TounamentID));
+                    this.db.Tournaments.Remove(tournament);
+                    this.db.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                ViewBag.ListTournament = this.db.Tournaments.ToList();
+                return View();
+            }
         }
 
         public ActionResult Update()

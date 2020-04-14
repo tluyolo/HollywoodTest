@@ -1,7 +1,9 @@
 ﻿using HollywoodTest.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,15 +11,43 @@ namespace HollywoodTest.Controllers
 {
     public class EventDetailStatusController : Controller
     {
+        HollywoodTestEntities1 db = new HollywoodTestEntities1();
         // GET: EventDetailStatus
         public ActionResult Index()
+        {
+
+            ViewBag.ListStatus = this.db.EventDetailStatus.ToList();
+            return View();
+        }
+
+        public ActionResult IndexUpdate()
         {
             HollywoodTestEntities1 Entities = new HollywoodTestEntities1();
             List<EventDetailStatu> events = Entities.EventDetailStatus.ToList();
             return View(events.ToList());
         }
 
-        public ActionResult Display()
+        [HttpPost]
+        public ActionResult Index(FormCollection formCollection)
+        {
+            try
+            {
+                string[] EventDetailStatusIDs = formCollection["EventDetailStatusID"].Split(new char[] { ',' });
+                foreach (string EventDetailStatusID in EventDetailStatusIDs)
+                {
+                    var eventDetailStatus = this.db.EventDetailStatus.Find(int.Parse(EventDetailStatusID));
+                    this.db.EventDetailStatus.Remove(eventDetailStatus);
+                    this.db.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                ViewBag.ListStatus = this.db.EventDetailStatus.ToList();
+                return View();
+            }
+        }
+            public ActionResult Display()
         {
             HollywoodTestEntities1 Entities = new HollywoodTestEntities1();
             List<EventDetailStatu> events = Entities.EventDetailStatus.ToList();
@@ -63,20 +93,30 @@ namespace HollywoodTest.Controllers
     
 
         // GET: EventDetailStatus/Edit/5
-        public ActionResult Edit(int Eventid)
+        public ActionResult Edit(short? id)
         {
-        EventDetailStatus sdb = new EventDetailStatus();
-        return View(sdb.GetEventDetailstatus().Find(Emodel => Emodel.EventDetailstatusID == Eventid));
-    }
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            EventDetailStatu @event = db.EventDetailStatus.Find(id);
+            if (@event == null)
+            {
+                return HttpNotFound();
+            }
+          return View(@event);
+        }
 
         // POST: EventDetailStatus/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, EventDetailStatusModels Emodel)
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "EventDetailStatusID,EventDetailStatusName")] EventDetailStatus @event)
         {
             try
             {
-                EventDetailStatus sdb = new EventDetailStatus();
-                sdb.UpdateDetails(Emodel);
+                db.Entry(@event).State = EntityState.Modified;
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             catch

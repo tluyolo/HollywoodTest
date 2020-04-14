@@ -4,17 +4,17 @@
 });
 
 var modelView = {
-    Employees: ko.observableArray([]),
-    viewTournaments: function () {
+    Tournamentss: ko.observableArray([]),
+    viewTournamentss: function () {
         var thisObj = this;
         try {
             $.ajax({
-                url: '/Tournament/ListEmployees',
+                url: '/Tournaments/Update',
                 type: 'GET',
                 dataType: 'json',
                 contentType: 'application/json',
                 success: function (data) {
-                    thisObj.Tournament(data);//Here we are assigning values to KO Observable array
+                    thisObj.Tournamentss(data);//Here we are assigning values to KO Observable array
                 },
                 error: function (err) {
                     alert(err.status + " : " + err.statusText);
@@ -22,7 +22,7 @@ var modelView = {
 
             });
         } catch (e) {
-            window.location.href = '/Tournaments/Index';
+            window.location.href = '/Tournaments/Update';
         }mployee
     },
     //Create

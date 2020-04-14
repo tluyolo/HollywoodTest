@@ -9,6 +9,7 @@
 
 namespace HollywoodTest
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
     
@@ -19,8 +20,10 @@ namespace HollywoodTest
         {
             this.Events = new HashSet<Event>();
         }
-    
+        [JsonProperty(PropertyName = "TounamentID")]
         public long TounamentID { get; set; }
+
+        [JsonProperty(PropertyName = "TounamentName")]
         public string TournamentName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

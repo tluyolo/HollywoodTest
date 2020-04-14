@@ -9,7 +9,7 @@ namespace HollywoodTest.Models
     public class EventDetailStatusModels
     {
         [Display(Name = "EventDetailstatusID")]
-        public int EventDetailstatusID { get; set; }
+        public short EventDetailstatusID { get; set; }
         
         [Required(ErrorMessage = "Event Detail status ID is required.")]
         public String EventDetailstatus{get;set;}

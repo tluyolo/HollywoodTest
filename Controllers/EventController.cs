@@ -21,11 +21,11 @@ namespace HollywoodTest.Controllers
             HollywoodTestEntities1 Entities = new HollywoodTestEntities1();
 
 
-            List<Event> events = Entities.Events.ToList();
+            ViewBag.ListEvents = this.db.Events.ToList();
 
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44359/Api/index");
+                client.BaseAddress = new Uri("https://localhost:44359/api/index");
                 var responseTask = client.GetAsync("Events");
                 responseTask.Wait();
 
@@ -43,13 +43,41 @@ namespace HollywoodTest.Controllers
                     ModelState.AddModelError(String.Empty, "Server error. Please Contact administrator");
                 }
             }
+            return View();
+        }
+
+
+        public ActionResult IndexUpdate()
+        {
+            HollywoodTestEntities1 Entities = new HollywoodTestEntities1();
+            List<Event> events = Entities.Events.ToList();
             return View(events.ToList());
         }
 
 
+        [HttpPost]
+        public ActionResult Index(FormCollection formCollection)
+        {
+            try
+            {
+                string[] EventIDs = formCollection["EventID"].Split(new char[] { ',' });
+                foreach (string EventID in EventIDs)
+                {
+                    var tournament = this.db.Events.Find(int.Parse(EventID));
+                    this.db.Events.Remove(tournament);
+                    this.db.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                ViewBag.ListEvents = this.db.Events.ToList();
+                return View();
+            }
+        }
 
-        // GET: Event/Details/5
-        public ActionResult Details(long? id)
+            // GET: Event/Details/5
+            public ActionResult Details(long? id)
         {
             if (id == null)
             {

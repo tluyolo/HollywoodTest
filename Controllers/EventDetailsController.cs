@@ -21,8 +21,8 @@ namespace HollywoodTest.Controllers
 
             HollywoodTestEntities1 Entities = new HollywoodTestEntities1();
 
-
-            List<EventDetail> events = Entities.EventDetails.ToList();
+            ViewBag.ListEvents = this.db.EventDetails.ToList();
+          
 
             using (var client = new HttpClient())
             {
@@ -44,9 +44,35 @@ namespace HollywoodTest.Controllers
                     ModelState.AddModelError(String.Empty, "Server error. Please Contact administrator");
                 }
             }
+            return View();
+        }
+
+        public ActionResult IndexUpdate()
+        {
+            HollywoodTestEntities1 Entities = new HollywoodTestEntities1();
+            List<EventDetail> events = Entities.EventDetails.ToList();
             return View(events.ToList());
         }
 
+        [HttpPost]
+        public ActionResult Index(FormCollection formCollection)
+        {
+            try {
+                string[] EventDIDs = formCollection["EventDetailID"].Split(new char[] { ',' });
+                foreach (string EventDID in EventDIDs)
+                {
+                    var tournament = this.db.EventDetails.Find(int.Parse(EventDID));
+                    this.db.EventDetails.Remove(tournament);
+                    this.db.SaveChanges();
+                }
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                ViewBag.ListEvents = this.db.EventDetails.ToList();
+                return View();
+            }
+        }
 
         public ActionResult Display()
         {
